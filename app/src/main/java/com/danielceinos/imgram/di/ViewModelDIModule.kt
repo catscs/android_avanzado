@@ -1,5 +1,6 @@
 package com.danielceinos.imgram.di
 
+import com.danielceinos.imgram.ui.detail.DetailViewModel
 import com.danielceinos.imgram.ui.home.HomeViewModel
 import org.kodein.di.*
 
@@ -9,5 +10,6 @@ object ViewModelDIModule {
 
     private val builder: DI.Builder.() -> Unit = {
         bind<HomeViewModel>() with provider { HomeViewModel(instance(), instance(), instance(), instance(), instance()) }
+        bind<DetailViewModel>() with provider { DetailViewModel(instance()) }
     }
 }

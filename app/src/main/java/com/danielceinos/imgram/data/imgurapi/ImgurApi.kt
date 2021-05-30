@@ -29,6 +29,9 @@ interface ImgurApi {
         @Field("tags") tags: String,
     ): Response<Unit>
 
+    @GET("album/{albumId}/images")
+    suspend fun getAlbumImages(@Path("albumId") albumId: String):ImgurResponse<List<Image>>
+
     @Multipart
     @POST("upload/")
     suspend fun uploadImage(@Part image: MultipartBody.Part): ImgurResponse<ImgurImage>

@@ -1,7 +1,9 @@
 package com.danielceinos.imgram.di
 
 import com.danielceinos.imgram.data.imgurapi.ImgurApi
+import com.danielceinos.imgram.data.session.SessionMemoryDataSource
 import com.danielceinos.imgram.domain.image.ImageRepository
+import com.danielceinos.imgram.usecases.DetailImageUseCase
 import org.kodein.di.DI
 import org.kodein.di.bind
 import org.kodein.di.instance

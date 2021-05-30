@@ -12,12 +12,22 @@ import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import timber.log.Timber
 import java.io.File
-
+import com.danielceinos.imgram.data.imgurapi.Image as AlbumImage
 
 class ImageRepository(
     private val imgurApi: ImgurApi,
     private val imgurLocal: ImageDao
 ) {
+
+    suspend fun getAlbumImages(albumId: String): List<AlbumImage> {
+        val images: ImgurResponse<List<AlbumImage>>? = try {
+            imgurApi.getAlbumImages(albumId)
+        } catch (e: Exception) {
+            Timber.e(e)
+            null
+        }
+        return if (images?.success == true) images.data else emptyList()
+    }
 
     suspend fun fetchHot(): List<Image> {
         val gallery: ImgurResponse<List<ImgurGallery>>? = try {
