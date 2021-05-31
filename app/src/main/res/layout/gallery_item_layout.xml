@@ -33,6 +33,7 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Title" />
 
+
         <TextView
             android:id="@+id/gallery_item_author_text"
             style="@style/TextAppearance.MaterialComponents.Overline"
@@ -121,7 +122,7 @@
             android:id="@+id/button_images"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="4dp"
             android:text="@string/image"
             android:textAllCaps="false"
             app:layout_constraintEnd_toEndOf="parent"

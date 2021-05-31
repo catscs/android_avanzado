@@ -3,15 +3,12 @@ package com.danielceinos.imgram.ui.detail
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.AttributeSet
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.danielceinos.imgram.R
-import com.danielceinos.imgram.ui.detail.DetailViewModel.*
-import com.danielceinos.imgram.ui.home.HomeViewModel
+import com.danielceinos.imgram.databinding.ActivityDetailBinding
+import com.danielceinos.imgram.ui.detail.DetailViewModel.Event
 import org.kodein.di.DI
 import org.kodein.di.DIAware
 import org.kodein.di.android.di
@@ -23,24 +20,32 @@ class DetailActivity : AppCompatActivity(), DIAware {
     override val di: DI by di()
 
     private val viewModel: DetailViewModel by lazy {
-        ViewModelProvider( direct.instance()).get(DetailViewModel::class.java)
+        ViewModelProvider(this, direct.instance()).get(DetailViewModel::class.java)
     }
 
     private val albumId: String by lazy { requireNotNull(intent.extras?.getString(IMAGES_ID_EXTRA))  }
+    private lateinit var adapter: DetailAdapter
+    private lateinit var binding: ActivityDetailBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_detail)
+        binding = ActivityDetailBinding.inflate(layoutInflater).also { setContentView(it.root) }
         if (savedInstanceState == null) {
             viewModel.getAlbumImages(albumId)
         }
+
+
+        adapter = DetailAdapter()
+        binding.imageRecyclerView.adapter = adapter
 
         viewModel.event.observe(this, Observer(::updateUi))
     }
 
     private fun updateUi(event: Event) {
+        binding.detailProgressBar.visibility = if (event is Event.Loading) View.VISIBLE else View.GONE
+
         when(event) {
-            is Event.Content -> TODO()
+            is Event.Content -> adapter.submitList(event.image)
         }
     }
 

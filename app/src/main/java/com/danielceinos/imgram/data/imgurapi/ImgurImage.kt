@@ -15,5 +15,5 @@ data class ImgurImage(
     val tags: List<ImgurTag>,
     val title: String?,
     val type: String,
-    val views: Int
+    val views: Int,
 )

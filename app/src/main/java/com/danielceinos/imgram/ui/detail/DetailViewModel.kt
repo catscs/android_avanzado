@@ -9,7 +9,8 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import java.lang.Exception
 
-class DetailViewModel(val useCase: DetailImageUseCase): ViewModel() {
+class DetailViewModel(private val useCase: DetailImageUseCase): ViewModel() {
+
     private val _event = MutableLiveData<Event>()
     val event: LiveData<Event>
         get() = _event
@@ -18,6 +19,7 @@ class DetailViewModel(val useCase: DetailImageUseCase): ViewModel() {
         runBlocking {
             launch {
                 try {
+                    _event.value = Event.Loading
                     _event.value = Event.Content(useCase.execute(albumId))
                 } catch (e: Exception) {
                     _event.value = Event.Content(emptyList())
@@ -26,8 +28,8 @@ class DetailViewModel(val useCase: DetailImageUseCase): ViewModel() {
         }
     }
 
-
     sealed class Event {
+        object Loading: Event()
         data class Content(val image: List<Image>) : Event()
     }
 }

@@ -92,7 +92,8 @@ class ImageRepository(
                     tags = imgurGallery.tags.map { Image.Tag(name = it.display_name) },
                     likes = imgurGallery.favorite_count,
                     published = true,
-                    isAlbum = true
+                    isAlbum = true,
+                    id = imgurGallery.id
                 )
         } else {
             Image(

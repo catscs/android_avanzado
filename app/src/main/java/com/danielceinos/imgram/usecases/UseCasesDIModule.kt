@@ -10,6 +10,6 @@ object UseCasesDIModule {
         bind<UploadImageUseCase>() with singleton { UploadImageUseCase(instance()) }
         bind<ShareImageUseCase>() with singleton { ShareImageUseCase(instance()) }
         bind<DeleteImageUseCase>() with singleton { DeleteImageUseCase(instance()) }
-        bind<DetailViewModel>() with singleton { DetailViewModel(instance()) }
+        bind<DetailImageUseCase>() with singleton { DetailImageUseCase(instance()) }
     }
 }
