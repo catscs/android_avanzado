@@ -48,8 +48,6 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.2.0"
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.2.0"
-    implementation 'androidx.wear:wear:1.0.0'
-    compileOnly 'com.google.android.wearable:wearable:2.6.0'
     kapt "androidx.lifecycle:lifecycle-compiler:2.2.0"
 
     /** Coroutines */
